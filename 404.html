@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>VClipGo</title>
+</head>
+<body style="background:black;color:white;text-align:center;margin-top:50px;">
+
+<h2>Se încarcă video...</h2>
+<button id="openBtn">▶ Deschide video</button>
+
+<script>
+// ia path-ul după domeniu
+let path = window.location.pathname;
+
+// ex: /vclipgo/short.icuxxxx
+let parts = path.split("/");
+
+// ultimul segment
+let code = parts[parts.length - 1];
+
+// verifică dacă este short.icu
+if(code && code !== "vclipgo" && code !== ""){
+    
+    let videoUrl = "https://short.icu/" + code;
+
+    // deschidere automată
+    window.open(videoUrl, "_blank");
+
+    // fallback buton
+    document.getElementById("openBtn").onclick = ()=>{
+        window.open(videoUrl, "_blank");
+    };
+
+} else {
+    document.body.innerHTML = "<h2>Link invalid</h2>";
+}
+</script>
+
+</body>
+</html>
