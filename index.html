@@ -1,41 +1,24 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8">
-<title>VClipGo</title>
+  <meta charset="UTF-8">
+  <title>Redirect Short Links</title>
+  <script>
+    // Preia ultima parte din URL (ex: "7rb89ir3n")
+    const path = window.location.pathname.split('/').pop();
+
+    // Dacă există ceva după /vclipgo/
+    if(path) {
+      // Construiește linkul short.icu
+      const redirectUrl = 'https://short.icu/' + path;
+      window.location.href = redirectUrl; // redirecționează
+    } else {
+      // Dacă e doar homepage, rămâi pe index
+      document.body.innerHTML = '<h2>Bine ai venit pe pagina VClipGo!</h2>';
+    }
+  </script>
 </head>
-<body style="background:black;color:white;text-align:center;margin-top:50px;">
-
-<h2>Se încarcă video...</h2>
-<button id="openBtn">▶ Deschide video</button>
-
-<script>
-// ia path-ul după domeniu
-let path = window.location.pathname;
-
-// ex: /vclipgo/short.icuxxxx
-let parts = path.split("/");
-
-// ultimul segment
-let code = parts[parts.length - 1];
-
-// verifică dacă este short.icu
-if(code && code !== "vclipgo" && code !== ""){
-    
-    let videoUrl = "https://short.icu/" + code;
-
-    // deschidere automată
-    window.open(videoUrl, "_blank");
-
-    // fallback buton
-    document.getElementById("openBtn").onclick = ()=>{
-        window.open(videoUrl, "_blank");
-    };
-
-} else {
-    document.body.innerHTML = "<h2>Link invalid</h2>";
-}
-</script>
-
+<body>
+  <p>Dacă nu se redirecționează automat, <a id="redirect-link" href="/">click aici</a>.</p>
 </body>
 </html>
